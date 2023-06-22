@@ -1,12 +1,8 @@
-import Spotlight from "../../components/spotlight";
+import Detail from "../../components/detail";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
-export default function Spotpage() {
-  const router = useRouter();
-  const { spotpage } = router.query;
-  //console.log("SpotArray:", pieces);
-
+export default function Detailpage() {
   const URL = "https://example-apis.vercel.app/api/art";
   const [pieces, setPieces] = useState();
 
@@ -23,12 +19,16 @@ export default function Spotpage() {
     loadPiece();
   }, []);
 
+  const router = useRouter();
+  const { detailpage } = router.query;
+  //console.log("SpotArray:", pieces);
   if (pieces === undefined) return null;
-  const currentArt = pieces.find((piece) => piece.slug === spotpage);
+  const currentArt = pieces?.find((piece) => piece.slug === detailpage);
+
   console.log("CurrentArt", currentArt);
   return (
     <div>
-      <Spotlight pieces={currentArt} />
+      <Detail pieces={currentArt} />
     </div>
   );
 }
