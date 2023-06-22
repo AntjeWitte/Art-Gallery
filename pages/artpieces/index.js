@@ -1,8 +1,7 @@
+import List from "../../components/list";
 import { useState, useEffect } from "react";
 
-import Spotlight from "../components/spotlight";
-
-export default function HomePage() {
+export default function ArtList({ pieces }) {
   const URL = "https://example-apis.vercel.app/api/art";
 
   const [art, setArt] = useState();
@@ -24,7 +23,7 @@ export default function HomePage() {
   return (
     <div>
       <h1>Art Gallery</h1>
-      <Spotlight pieces={art} />
+      <List pieces={art} />
     </div>
   );
 }
