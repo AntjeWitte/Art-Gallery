@@ -1,11 +1,10 @@
-import ArtPiecePreview from "../preview";
-import "./Entry.css";
+import ArtPiecePreview from "./preview";
 
 export default function List({ pieces }) {
-  console.log({ pieces });
+  console.log("Pieces:", pieces);
   return (
     <>
-      <ArtPiecePreview />
+      <ArtPiecePreview pieces={pieces} />
     </>
   );
 }
