@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import FavoriteButton from "./favoritebutton";
 
 export default function ArtPiecePreview({ pieces }) {
   return (
@@ -9,6 +10,7 @@ export default function ArtPiecePreview({ pieces }) {
           return (
             <li key={piece.slug}>
               <h2>{piece.name}</h2>
+              <FavoriteButton slug={piece.slug} />
               <Image
                 src={piece.imageSource}
                 alt={piece.name}
