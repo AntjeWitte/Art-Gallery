@@ -1,24 +1,7 @@
 import Detail from "../../components/detail";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
 
-export default function Detailpage() {
-  const URL = "https://example-apis.vercel.app/api/art";
-  const [pieces, setPieces] = useState();
-
-  useEffect(() => {
-    async function loadPiece() {
-      try {
-        const response = await fetch(URL);
-        const data = await response.json();
-        setPieces(data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    loadPiece();
-  }, []);
-
+export default function Detailpage({ pieces, onAddEntry, entries }) {
   const router = useRouter();
   const { detailpage } = router.query;
   //console.log("SpotArray:", pieces);
@@ -28,7 +11,7 @@ export default function Detailpage() {
   console.log("CurrentArt", currentArt);
   return (
     <div>
-      <Detail pieces={currentArt} />
+      <Detail pieces={currentArt} onAddEntry={onAddEntry} entries={entries} />
     </div>
   );
 }

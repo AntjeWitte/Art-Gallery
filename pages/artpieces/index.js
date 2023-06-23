@@ -1,29 +1,10 @@
 import List from "../../components/list";
-import { useState, useEffect } from "react";
 
-export default function ArtList({ pieces }) {
-  const URL = "https://example-apis.vercel.app/api/art";
-
-  const [art, setArt] = useState();
-
-  useEffect(() => {
-    async function loadArt() {
-      try {
-        const response = await fetch(URL);
-        const data = await response.json();
-        setArt(data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    loadArt();
-  }, []);
-  console.log("Art:", art);
-
+export default function ArtList({ pieces, onAddEntry, entries }) {
   return (
     <div>
       <h1>Art Gallery</h1>
-      <List pieces={art} />
+      <List pieces={pieces} onAddEntry={onAddEntry} entries={entries} />
     </div>
   );
 }
