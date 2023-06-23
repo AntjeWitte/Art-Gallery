@@ -16,7 +16,7 @@ export default function ArtPiecePreview({ pieces }) {
                 height={230}
               />
               <p>{piece.artist}</p>
-              <Link href={`/artpieces/${piece.slug}`}>Zur spot page</Link>
+              <Link href={`/artpieces/${piece.slug}`}>Weitere Details</Link>
             </li>
           );
         })}
