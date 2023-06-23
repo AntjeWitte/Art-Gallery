@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 //import { useRouter } from "next/router";
 
 export default function Detail({ pieces }) {
@@ -19,6 +20,9 @@ export default function Detail({ pieces }) {
             height={230}
           />
           <p>{pieces.artist}</p>
+          <p>{pieces.year}</p>
+          <p>{pieces.genre}</p>
+          <Link href={`/artpieces`}>Zurück zur Liste</Link>
         </li>
       </ul>
     </article>
