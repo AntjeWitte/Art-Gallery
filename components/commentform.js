@@ -1,4 +1,12 @@
-export default function EntryForm({ onAddEntry, entries }) {
+import { uid } from "uid";
+import useLocalStorageState from "use-local-storage-state";
+
+export default function EntryForm({
+  onAddEntry,
+  entries,
+  currentArt,
+  onDeleteEntry,
+}) {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -16,6 +24,13 @@ export default function EntryForm({ onAddEntry, entries }) {
           <div key={entry.id}>
             <p>{entry.date}</p>
             <p>{entry.notes}</p>
+            <button
+              type="button"
+              title="delete movie"
+              onClick={() => onDeleteEntry(entry.id)}
+            >
+              ✕
+            </button>
             <hr></hr>
           </div>
         ))}
@@ -25,7 +40,7 @@ export default function EntryForm({ onAddEntry, entries }) {
           <textarea name="notes" id="notes" rows="4" />
         </div>
         <div className="entry-form__button-wrapper">
-          <button type="submit">Create</button>
+          <button type="submit">Send</button>
         </div>
       </div>
     </form>
