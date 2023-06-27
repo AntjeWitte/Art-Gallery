@@ -1,4 +1,4 @@
-import Favorites from "../../components/favorites";
+import Favorites from "../../components/favorites/favorites";
 
 export default function ArtList({ favorites }) {
   return (

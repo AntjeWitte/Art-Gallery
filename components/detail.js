@@ -1,8 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import EntryForm from "./commentform";
+import FavoriteButton from "./favorites/favoritebutton";
 
-export default function Detail({ currentArt, onAddEntry, onDeleteEntry }) {
+export default function Detail({
+  currentArt,
+  onAddEntry,
+  onToggleFavorite,
+  onDeleteEntry,
+}) {
   if (currentArt === undefined) return null;
 
   return (
@@ -10,6 +16,11 @@ export default function Detail({ currentArt, onAddEntry, onDeleteEntry }) {
       <ul>
         <li key={currentArt.slug}>
           <h2>{currentArt.name}</h2>
+          <FavoriteButton
+            slug={currentArt.slug}
+            onToggleFavorite={onToggleFavorite}
+            piece={currentArt}
+          />
           <Image
             src={currentArt.imageSource}
             alt={currentArt.name}

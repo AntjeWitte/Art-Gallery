@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import FavoriteButton from "./favoritebutton";
+import FavoriteButton from "./favorites/favoritebutton";
 
-export default function ListElements({ pieces }) {
+export default function ListElements({ pieces, onToggleFavorite }) {
   return (
     <article className="entry">
       <ul>
@@ -10,7 +10,11 @@ export default function ListElements({ pieces }) {
           return (
             <li key={piece.slug}>
               <h2>{piece.name}</h2>
-              <FavoriteButton slug={piece.slug} />
+              <FavoriteButton
+                slug={piece.slug}
+                onToggleFavorite={onToggleFavorite}
+                piece={piece}
+              />
               <Image
                 src={piece.imageSource}
                 alt={piece.name}

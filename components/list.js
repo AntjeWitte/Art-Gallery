@@ -1,10 +1,10 @@
 import ListElements from "./listelements";
 
-export default function List({ pieces }) {
+export default function List({ pieces, onToggleFavorite }) {
   console.log("Pieces:", pieces);
   return (
     <>
-      <ListElements pieces={pieces} />
+      <ListElements pieces={pieces} onToggleFavorite={onToggleFavorite} />
     </>
   );
 }

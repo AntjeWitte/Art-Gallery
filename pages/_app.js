@@ -7,7 +7,7 @@ import useLocalStorageState from "use-local-storage-state";
 export default function App({ Component, pageProps }) {
   const URL = "https://example-apis.vercel.app/api/art";
 
-  const [art, setArt] = useState();
+  const [art, setArt] = useLocalStorageState("artPieces", { defaultValue: [] });
 
   useEffect(() => {
     async function loadArt() {
@@ -64,25 +64,18 @@ export default function App({ Component, pageProps }) {
     setArt(newArt);
   }
 
-  const [favorites, setFavorite] = useState(art);
-
   function handleToggleFavorite(slug) {
-    setFavorite((favorite) => {
-      const info = favorite.find((info) => info.slug === slug);
-      if (info) {
-        return favorite.map((info) =>
-          info.slug === slug ? { ...info, isFavorite: !info.isFavorite } : info
-        );
+    const newFavorite = art.map((artPiece) => {
+      if (slug !== artPiece.slug) {
+        return artPiece;
       }
-      return [...favorite, { slug, isFavorite: true }];
+      return {
+        ...artPiece,
+        isFavorite: !artPiece.isFavorite,
+      };
     });
+    setArt(newFavorite);
   }
-
-  const info = favorites?.find((info) => info.slug === slug) ?? {
-    isFavorite: false,
-  };
-  const { isFavorite } = info;
-  // const isFavorite = info.isFavorite
 
   return (
     <>
@@ -91,7 +84,6 @@ export default function App({ Component, pageProps }) {
         {...pageProps}
         pieces={art}
         onToggleFavorite={handleToggleFavorite}
-        favorites={favorites}
         onAddEntry={handleAddEntry}
         onDeleteEntry={handleDeleteEntry}
       />

@@ -1,20 +1,26 @@
 import Image from "next/image";
 import FavoriteButton from "./favoritebutton";
 
-export default function Favorites({ favorites }) {
-  if (favorites === undefined) return null;
-  const likedArt = favorites.map((fav) =>
-    fav.isFavorite === true ? { ...fav } : null
-  );
+export default function Favorites({ pieces, onToggleFavorite }) {
+  if (pieces === undefined) return null;
+  const likedArt = pieces.filter((fav) => {
+    return fav.isFavorite === true;
+  });
+
+  console.log("FavPieces:", pieces);
 
   return (
     <article>
       <ul>
-        {likedArt?.map((favorite) => {
+        {likedArt.map((favorite) => {
           return (
             <li key={favorite.slug}>
               <h2>{favorite.name}</h2>
-              <FavoriteButton slug={favorite.slug} />
+              <FavoriteButton
+                slug={favorite.slug}
+                pieces={pieces}
+                onToggleFavorite={onToggleFavorite}
+              />
               <Image
                 src={favorite.imageSource}
                 alt={favorite.name}

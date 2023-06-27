@@ -5,6 +5,7 @@ export default function ArtList({
   onAddEntry,
   entries,
   onDeleteEntry,
+  onToggleFavorite,
 }) {
   return (
     <div>
@@ -13,6 +14,7 @@ export default function ArtList({
         pieces={pieces}
         onAddEntry={onAddEntry}
         onDeleteEntry={onDeleteEntry}
+        onToggleFavorite={onToggleFavorite}
         entries={entries}
       />
     </div>
