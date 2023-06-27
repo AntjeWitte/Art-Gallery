@@ -15,14 +15,16 @@ export default function ListElements({ pieces, onToggleFavorite }) {
                 onToggleFavorite={onToggleFavorite}
                 piece={piece}
               />
+              <br></br>
               <Image
                 src={piece.imageSource}
                 alt={piece.name}
-                width={140}
+                width={240}
                 height={230}
               />
               <p>{piece.artist}</p>
               <Link href={`/artpieces/${piece.slug}`}>Weitere Details</Link>
+              <hr></hr>
             </li>
           );
         })}

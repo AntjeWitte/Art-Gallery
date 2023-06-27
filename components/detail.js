@@ -24,17 +24,19 @@ export default function Detail({
           <Image
             src={currentArt.imageSource}
             alt={currentArt.name}
-            width={140}
+            width={240}
             height={230}
           />
           <p>{currentArt.artist}</p>
           <p>{currentArt.year}</p>
           <p>{currentArt.genre}</p>
+          <br></br>
           <EntryForm
             onAddEntry={onAddEntry}
             onDeleteEntry={onDeleteEntry}
             currentArt={currentArt}
           />
+          <br></br>
           <Link href={`/artpieces`}>Zurück zur Liste</Link>
         </li>
       </ul>

@@ -11,7 +11,8 @@ export default function FavoriteButton({ piece, slug, onToggleFavorite }) {
         onClick={() => onToggleFavorite(slug)}
         aria-label="favorite"
       >
-        {piece.isFavorite === true ? "isFavorite" : "isNotFavorite"}
+        {console.log("FavPieces:", piece)}
+        {piece?.isFavorite === true ? "isFavorite" : "isNotFavorite"}
         {/* {piece.isFavorite === true ? <Heart /> : <HeartUnfilled />} */}
       </button>
     </div>

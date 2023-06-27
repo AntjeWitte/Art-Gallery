@@ -7,10 +7,11 @@ export default function Favorites({ pieces, onToggleFavorite }) {
     return fav.isFavorite === true;
   });
 
-  console.log("FavPieces:", pieces);
+  console.log("likedArt:", likedArt);
 
   return (
     <article>
+      <h2>Your favorites: </h2>
       <ul>
         {likedArt.map((favorite) => {
           return (
@@ -24,10 +25,11 @@ export default function Favorites({ pieces, onToggleFavorite }) {
               <Image
                 src={favorite.imageSource}
                 alt={favorite.name}
-                width={140}
+                width={240}
                 height={230}
               />
               <p>{favorite.artist}</p>
+              <hr></hr>
             </li>
           );
         })}

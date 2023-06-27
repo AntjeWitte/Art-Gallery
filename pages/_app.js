@@ -3,6 +3,7 @@ import Navigation from "../components/navigation";
 import { useState, useEffect } from "react";
 import { uid } from "uid";
 import useLocalStorageState from "use-local-storage-state";
+import "./app.css";
 
 export default function App({ Component, pageProps }) {
   const URL = "https://example-apis.vercel.app/api/art";
@@ -79,15 +80,19 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <GlobalStyle />
-      <Component
-        {...pageProps}
-        pieces={art}
-        onToggleFavorite={handleToggleFavorite}
-        onAddEntry={handleAddEntry}
-        onDeleteEntry={handleDeleteEntry}
-      />
-      <Navigation />
+      <div className="app">
+        <main className="app__main">
+          <GlobalStyle />
+          <Component
+            {...pageProps}
+            pieces={art}
+            onToggleFavorite={handleToggleFavorite}
+            onAddEntry={handleAddEntry}
+            onDeleteEntry={handleDeleteEntry}
+          />
+          <Navigation />
+        </main>
+      </div>
     </>
   );
 }
