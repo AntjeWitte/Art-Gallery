@@ -1,17 +1,12 @@
 import { uid } from "uid";
 import useLocalStorageState from "use-local-storage-state";
 
-export default function EntryForm({
-  onAddEntry,
-  entries,
-  currentArt,
-  onDeleteEntry,
-}) {
+export default function EntryForm({ onAddEntry, currentArt, onDeleteEntry }) {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    onAddEntry(data);
+    onAddEntry(currentArt, data);
     event.target.reset();
     console.log("Data: ", data);
   }
@@ -20,14 +15,14 @@ export default function EntryForm({
     <form className="entry-form" onSubmit={handleSubmit}>
       <h2 className="entry-form__title">Comments:</h2>
       <div className="entry-form__fields">
-        {entries?.map((entry) => (
-          <div key={entry.id}>
-            <p>{entry.date}</p>
-            <p>{entry.notes}</p>
+        {currentArt.comments?.map((comment) => (
+          <div key={comment.id}>
+            <p>{comment.date}</p>
+            <p>{comment.notes}</p>
             <button
               type="button"
               title="delete movie"
-              onClick={() => onDeleteEntry(entry.id)}
+              onClick={() => onDeleteEntry(comment.id)}
             >
               ✕
             </button>

@@ -2,16 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import EntryForm from "./commentform";
 
-//import { useRouter } from "next/router";
-
-export default function Detail({
-  currentArt,
-  onAddEntry,
-  entries,
-  onDeleteEntry,
-}) {
-  console.log("Arraylänge", currentArt);
-
+export default function Detail({ currentArt, onAddEntry, onDeleteEntry }) {
   if (currentArt === undefined) return null;
 
   return (
@@ -32,7 +23,6 @@ export default function Detail({
             onAddEntry={onAddEntry}
             onDeleteEntry={onDeleteEntry}
             currentArt={currentArt}
-            entries={entries}
           />
           <Link href={`/artpieces`}>Zurück zur Liste</Link>
         </li>

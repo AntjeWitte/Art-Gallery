@@ -1,12 +1,7 @@
 import Detail from "../../components/detail";
 import { useRouter } from "next/router";
 
-export default function Detailpage({
-  pieces,
-  onAddEntry,
-  entries,
-  onDeleteEntry,
-}) {
+export default function Detailpage({ pieces, onAddEntry, onDeleteEntry }) {
   const router = useRouter();
   const { detailpage } = router.query;
   console.log("SpotArray:", pieces);
@@ -20,7 +15,6 @@ export default function Detailpage({
         currentArt={currentArt}
         onAddEntry={onAddEntry}
         onDeleteEntry={onDeleteEntry}
-        entries={entries}
       />
     </div>
   );

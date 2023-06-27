@@ -22,26 +22,46 @@ export default function App({ Component, pageProps }) {
     loadArt();
   }, []);
 
-  const [entries, setEntries] = useLocalStorageState("comments:", {
-    defaultValue: [],
-  });
+  console.log("art", art);
 
-  function handleAddEntry(newEntry) {
+  function handleAddEntry(currentArt, newComment) {
     const date = new Date().toLocaleDateString("en-us", {
       dateStyle: "medium",
     });
-    setEntries([{ id: uid(), date, ...newEntry }, ...entries]);
-  }
-  //   const detailPiece = pieces.find((artPiece) => {
-  //     artPiece.slug === slug;
-  //   });
-  //   if (detailPiece === true) {
-  //     setEntries([{ id: uid(), date, ...newEntry }, ...entries]);
-  //   } else setEntries(entries);
-  // }
 
-  function handleDeleteEntry(id) {
-    setEntries(entries.filter((entry) => (entry.id === id ? false : true)));
+    const newArt = art.map((artPiece) => {
+      if (currentArt.slug !== artPiece.slug) {
+        return artPiece;
+      }
+
+      const newCommentWithDateAndId = {
+        ...newComment,
+        date,
+        id: uid(),
+      };
+
+      return {
+        ...artPiece,
+        comments: [...(artPiece.comments ?? []), newCommentWithDateAndId],
+      };
+    });
+    setArt(newArt);
+  }
+
+  function handleDeleteEntry(commentId) {
+    // setArt(art.filter((artPiece) => (artPiece.comments.id === commentId ? false : true)));
+    // setArt(art.filter((artPiece) => (artPiece.comments.id !== commentId ? true : false)));
+
+    const newArt = art.map((artPiece) => ({
+      ...artPiece,
+      comments: artPiece.comments?.filter(
+        (comment) => comment.id !== commentId
+      ),
+      // das selbe wie:
+      // comments: artPiece.comments.filter(({ id }) => id !== commentId)
+    }));
+
+    setArt(newArt);
   }
 
   const [favorites, setFavorite] = useState(art);
@@ -62,6 +82,7 @@ export default function App({ Component, pageProps }) {
     isFavorite: false,
   };
   const { isFavorite } = info;
+  // const isFavorite = info.isFavorite
 
   return (
     <>
@@ -73,7 +94,6 @@ export default function App({ Component, pageProps }) {
         favorites={favorites}
         onAddEntry={handleAddEntry}
         onDeleteEntry={handleDeleteEntry}
-        entries={entries}
       />
       <Navigation />
     </>
