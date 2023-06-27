@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import FavoriteButton from "./favoritebutton";
 
-export default function ArtPiecePreview({ pieces }) {
+export default function ListElements({ pieces }) {
   return (
     <article className="entry">
       <ul>

@@ -1,29 +1,29 @@
 import Image from "next/image";
 import Link from "next/link";
 import EntryForm from "./commentform";
-//import { useRouter } from "next/router";
 
-export default function Detail({ pieces, onAddEntry, entries }) {
-  console.log("Arraylänge", pieces);
-  //   const router = useRouter();
-  //   const { spotlight } = router.query;
-  if (pieces === undefined) return null;
+export default function Detail({ currentArt, onAddEntry, onDeleteEntry }) {
+  if (currentArt === undefined) return null;
 
   return (
     <article>
       <ul>
-        <li key={pieces.slug}>
-          <h2>{pieces.name}</h2>
+        <li key={currentArt.slug}>
+          <h2>{currentArt.name}</h2>
           <Image
-            src={pieces.imageSource}
-            alt={pieces.name}
+            src={currentArt.imageSource}
+            alt={currentArt.name}
             width={140}
             height={230}
           />
-          <p>{pieces.artist}</p>
-          <p>{pieces.year}</p>
-          <p>{pieces.genre}</p>
-          <EntryForm onAddEntry={onAddEntry} entries={entries} />
+          <p>{currentArt.artist}</p>
+          <p>{currentArt.year}</p>
+          <p>{currentArt.genre}</p>
+          <EntryForm
+            onAddEntry={onAddEntry}
+            onDeleteEntry={onDeleteEntry}
+            currentArt={currentArt}
+          />
           <Link href={`/artpieces`}>Zurück zur Liste</Link>
         </li>
       </ul>
