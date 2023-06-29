@@ -3,13 +3,21 @@ import Navigation from "../components/navigation";
 import { useState, useEffect } from "react";
 import { uid } from "uid";
 import useLocalStorageState from "use-local-storage-state";
+import "./app.css";
 
 export default function App({ Component, pageProps }) {
   const URL = "https://example-apis.vercel.app/api/art";
 
-  const [art, setArt] = useState();
+  const [art, setArt] = useLocalStorageState("artPieces", {
+    defaultValue: [],
+  });
+  console.log("art on moun", art);
 
   useEffect(() => {
+    if (art.length > 0) {
+      return;
+    }
+
     async function loadArt() {
       try {
         const response = await fetch(URL);
@@ -64,38 +72,34 @@ export default function App({ Component, pageProps }) {
     setArt(newArt);
   }
 
-  const [favorites, setFavorite] = useState(art);
-
   function handleToggleFavorite(slug) {
-    setFavorite((favorite) => {
-      const info = favorite.find((info) => info.slug === slug);
-      if (info) {
-        return favorite.map((info) =>
-          info.slug === slug ? { ...info, isFavorite: !info.isFavorite } : info
-        );
+    const newFavorite = art.map((artPiece) => {
+      if (slug !== artPiece.slug) {
+        return artPiece;
       }
-      return [...favorite, { slug, isFavorite: true }];
+      return {
+        ...artPiece,
+        isFavorite: !artPiece.isFavorite,
+      };
     });
+    setArt(newFavorite);
   }
-
-  const info = favorites?.find((info) => info.slug === slug) ?? {
-    isFavorite: false,
-  };
-  const { isFavorite } = info;
-  // const isFavorite = info.isFavorite
 
   return (
     <>
-      <GlobalStyle />
-      <Component
-        {...pageProps}
-        pieces={art}
-        onToggleFavorite={handleToggleFavorite}
-        favorites={favorites}
-        onAddEntry={handleAddEntry}
-        onDeleteEntry={handleDeleteEntry}
-      />
-      <Navigation />
+      <div className="app">
+        <main className="app__main">
+          <GlobalStyle />
+          <Component
+            {...pageProps}
+            pieces={art}
+            onToggleFavorite={handleToggleFavorite}
+            onAddEntry={handleAddEntry}
+            onDeleteEntry={handleDeleteEntry}
+          />
+          <Navigation />
+        </main>
+      </div>
     </>
   );
 }

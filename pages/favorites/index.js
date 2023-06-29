@@ -1,10 +1,10 @@
-import Favorites from "../../components/favorites";
+import Favorites from "../../components/favorites/favorites";
 
-export default function ArtList({ favorites }) {
+export default function FavoritesList({ pieces, onToggleFavorite }) {
   return (
     <div>
       <h1>Art Gallery</h1>
-      <Favorites favorites={favorites} />
+      <Favorites pieces={pieces} onToggleFavorite={onToggleFavorite} />
     </div>
   );
 }

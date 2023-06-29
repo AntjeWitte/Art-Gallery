@@ -1,13 +1,19 @@
 import Detail from "../../components/detail";
 import { useRouter } from "next/router";
 
-export default function Detailpage({ pieces, onAddEntry, onDeleteEntry }) {
+export default function Detailpage({
+  pieces,
+  onAddEntry,
+  onDeleteEntry,
+  onToggleFavorite,
+}) {
   const router = useRouter();
-  const { detailpage } = router.query;
+  const { artpieces, detailpage } = router.query;
   console.log("SpotArray:", pieces);
   if (pieces === undefined) return null;
   const currentArt = pieces?.find((piece) => piece.slug === detailpage);
 
+  console.log("dynamic artpieces:", artpieces);
   console.log("CurrentArt", currentArt);
   return (
     <div>
@@ -15,6 +21,7 @@ export default function Detailpage({ pieces, onAddEntry, onDeleteEntry }) {
         currentArt={currentArt}
         onAddEntry={onAddEntry}
         onDeleteEntry={onDeleteEntry}
+        onToggleFavorite={onToggleFavorite}
       />
     </div>
   );

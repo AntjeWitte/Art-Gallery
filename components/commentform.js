@@ -15,6 +15,7 @@ export default function EntryForm({ onAddEntry, currentArt, onDeleteEntry }) {
     <form className="entry-form" onSubmit={handleSubmit}>
       <h2 className="entry-form__title">Comments:</h2>
       <div className="entry-form__fields">
+        <hr></hr>
         {currentArt.comments?.map((comment) => (
           <div key={comment.id}>
             <p>{comment.date}</p>
