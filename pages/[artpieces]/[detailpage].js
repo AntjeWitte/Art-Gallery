@@ -8,11 +8,12 @@ export default function Detailpage({
   onToggleFavorite,
 }) {
   const router = useRouter();
-  const { detailpage } = router.query;
+  const { artpieces, detailpage } = router.query;
   console.log("SpotArray:", pieces);
   if (pieces === undefined) return null;
   const currentArt = pieces?.find((piece) => piece.slug === detailpage);
 
+  console.log("dynamic artpieces:", artpieces);
   console.log("CurrentArt", currentArt);
   return (
     <div>

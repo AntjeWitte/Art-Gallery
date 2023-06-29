@@ -19,7 +19,7 @@ export default function Favorites({ pieces, onToggleFavorite }) {
               <h2>{favorite.name}</h2>
               <FavoriteButton
                 slug={favorite.slug}
-                pieces={pieces}
+                piece={favorite}
                 onToggleFavorite={onToggleFavorite}
               />
               <Image

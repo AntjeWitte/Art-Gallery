@@ -8,9 +8,16 @@ import "./app.css";
 export default function App({ Component, pageProps }) {
   const URL = "https://example-apis.vercel.app/api/art";
 
-  const [art, setArt] = useLocalStorageState("artPieces", { defaultValue: [] });
+  const [art, setArt] = useLocalStorageState("artPieces", {
+    defaultValue: [],
+  });
+  console.log("art on moun", art);
 
   useEffect(() => {
+    if (art.length > 0) {
+      return;
+    }
+
     async function loadArt() {
       try {
         const response = await fetch(URL);
